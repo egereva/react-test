@@ -3,39 +3,52 @@ import s from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 
 const DialogItem = (props) => {
-  return (
-      <div className={s.dialog + ' '+ s.active}>
-        <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
-      </div>
-  )
+    return (
+        <div className={s.dialog + ' ' + s.active}>
+            <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
+        </div>
+    )
 }
 
 const Message = (props) => {
-  return (
-      <div className={s.message}>{props.message}</div>
-  )
+    return (
+        <div className={s.message}>{props.message}</div>
+    )
 }
 
 const Dialogs = (props) => {
-  return (
-    <div className={s.dialogs}>
-        <div className={s.dialogsItems}>
-          <DialogItem name="Dimych" id="1" />
-          <DialogItem name="Andrey" id="2" />
-          <DialogItem name="Ivan" id="3" />
-          <DialogItem name="Denis" id="4" />
-          <DialogItem name="Sveta" id="5" />
-          <DialogItem name="Viktor" id="6" />
+    const dialogsData = [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Ivan'},
+        {id: 4, name: 'Denis'},
+        {id: 5, name: 'Sveta'},
+        {id: 6, name: 'Viktor'}
+    ]
+
+    const dialogsElements = dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+
+    const messagesData = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your it-kamasutra'},
+        {id: 3, message: 'Yo!'},
+        {id: 4, message: 'Yo!'},
+        {id: 5, message: 'Yo!'},
+        {id: 6, message: 'Yo! Yo!'}
+    ]
+
+    const messagesElements = messagesData.map(message => <Message message={message.message}/>)
+
+    return (
+        <div className={s.dialogs}>
+            <div className={s.dialogsItems}>
+                { dialogsElements }
+            </div>
+            <div className={s.messages}>
+                { messagesElements }
+            </div>
         </div>
-        <div className={s.messages}>
-          <Message message="Hi" />
-          <Message message="How is your it-kamasutra" />
-          <Message message="Yo!" />
-          <Message message="Yo!" />
-          <Message message="Yo!" />
-        </div>
-    </div>
-  )
+    )
 }
 
 export default Dialogs
